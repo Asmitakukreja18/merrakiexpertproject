@@ -195,11 +195,18 @@ const cellStyle = {
                     <Paper sx={{ p: 1, borderRadius: 2 }}>
                         <Typography fontWeight="bold" fontSize={18} mb={2}>New Purchase Order</Typography>
                         <Grid container spacing={2}>
-                            <Grid item xs={12} sm={4}><TextField fullWidth label="Purchase Order*" sx={{  width: 500,
-                  '& .MuiOutlinedInput-root': {
-                    borderRadius: '12px',
-                    bgcolor: '#f9fafb',height:40,
-                  },}} defaultValue="PO-0001" /></Grid>
+                            <Grid item xs={12} sm={4}><TextField fullWidth label="Purchase Order*" sx={{
+        '& .MuiOutlinedInput-root': {
+          borderRadius: '10px',
+          bgcolor: '#f9fafb',
+          height: 40, width: {
+                          xs: '100%',
+                          sm: 350,
+                          md: 400,
+                          lg: 500
+                        },
+        },
+      }} defaultValue="PO-0001" /></Grid>
                   
                   
                   <Grid container spacing={2} sx={{ mt: 1 }}>
@@ -223,7 +230,18 @@ const cellStyle = {
               fullWidth
               multiline
               rows={2}
-              defaultValue={`Laxmi Enterprises,\nNagpur, Maharashtra, 200145`}
+              defaultValue={`Laxmi Enterprises,\nNagpur, Maharashtra, 200145`} sx={{
+        '& .MuiOutlinedInput-root': {
+          borderRadius: '10px',
+          bgcolor: '#f9fafb',
+          height: 80, width: {
+                          xs: '100%',
+                          sm: 150,
+                          md: 200,
+                          lg: 300
+                        },
+        },
+      }}
             />
             <Button size="small" sx={{ textTransform: 'none', mt: 1 }}>✏️ Edit Details</Button>
           </>
@@ -286,18 +304,17 @@ const cellStyle = {
                     
                            <Grid item xs={12} sm={4}>
   <FormControl sx={{
-    width: {
+        '& .MuiOutlinedInput-root': {
+          borderRadius: '10px',
+          bgcolor: '#f9fafb',
+          height: 40, width: {
                           xs: '100%',
-                          sm: 251,
-                          md: 302,
+                          sm: 150,
+                          md: 200,
                           lg: 300
                         },
-    '& .MuiOutlinedInput-root': {
-      borderRadius: '10px',
-      bgcolor: '#f9fafb',
-      height: 40,
-    },
-  }}>
+        },
+      }}>
     <InputLabel>Vendor Name*</InputLabel>
     <Select
      
@@ -334,43 +351,49 @@ const cellStyle = {
   </FormControl>
 </Grid>
 
-                            <Grid item xs={12} sm={4}><TextField fullWidth label="Delivery Date" type="date" InputLabelProps={{ shrink: true }}sx={{  width: 150,
-                  '& .MuiOutlinedInput-root': {
-                    borderRadius: '10px',
-                    bgcolor: '#f9fafb',height:40,width: {
+                            <Grid item xs={12} sm={4}><TextField fullWidth label="Delivery Date" type="date" InputLabelProps={{ shrink: true }} sx={{
+        '& .MuiOutlinedInput-root': {
+          borderRadius: '10px',
+          bgcolor: '#f9fafb',
+          height: 40, width: {
                           xs: '100%',
-                          sm: 251,
-                          md: 302,
+                          sm: 150,
+                          md: 200,
                           lg: 300
                         },
-                  },}} /></Grid>
+        },
+      }}/></Grid>
                             <Grid item xs={12} sm={4}>
-                                <FormControl fullWidth sx={{ 
-                  '& .MuiOutlinedInput-root': {
-                    borderRadius: '10px',
-                    bgcolor: '#f9fafb',height:40,width: {
+                                <FormControl fullWidth sx={{
+        '& .MuiOutlinedInput-root': {
+          borderRadius: '10px',
+          bgcolor: '#f9fafb',
+          height: 40, width: {
                           xs: '100%',
-                          sm: 251,
-                          md: 302,
+                          sm: 150,
+                          md: 200,
                           lg: 300
                         },
-                  },}}>
+        },
+      }}>
                                     <InputLabel>Payment Terms</InputLabel>
                                     <Select defaultValue="Due end of the month" >
                                         <MenuItem value="Due end of the month">Due end of the month</MenuItem>
                                     </Select>
                                 </FormControl>
                             </Grid>
-                            <Grid item xs={12} sm={4}><TextField fullWidth label="Due Date" type="date" defaultValue="2025-06-30" InputLabelProps={{ shrink: true }} sx={{  width: 150,
-                  '& .MuiOutlinedInput-root': {
-                    borderRadius: '10px',
-                    bgcolor: '#f9fafb',height:40,width: {
+                            <Grid item xs={12} sm={4}><TextField fullWidth label="Due Date" type="date" defaultValue="2025-06-30" InputLabelProps={{ shrink: true }}  sx={{
+        '& .MuiOutlinedInput-root': {
+          borderRadius: '10px',
+          bgcolor: '#f9fafb',
+          height: 40, width: {
                           xs: '100%',
-                          sm: 251,
-                          md: 302,
+                          sm: 150,
+                          md: 200,
                           lg: 300
                         },
-                  },}}/></Grid></Grid></Grid>
+        },
+      }}/></Grid></Grid></Grid>
                         
 
                        <Box mt={5}>
