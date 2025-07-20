@@ -50,11 +50,11 @@ const salesItems = [
     path: '/customer',
     matchPaths: ['/customer', '/add-customer', '/customer-list']
   },
-  {
-    text: 'Quotation',
-    icon: <RequestQuote />,
-    path: '/quotation',
-    matchPaths: ['/quotation', '/add-quotation', '/quotation-list']
+   {
+    text: 'Work Order',
+    icon: <Construction />,
+    path: '/Work-Order',
+    matchPaths: ['/Work-Order','/add-Work-Order','/Work-Order-list']
   },
   {
     text: 'Invoice',
@@ -66,7 +66,7 @@ const salesItems = [
     text: 'Pro Forma Invoice',
     icon: <Assignment />,
     path: '/pro-forma-Invoice',
-    matchPaths: ['/pro-forma-Invoice', '/new-pro-forma-Invoice', '/pro-forma-Invoice-list']
+    matchPaths: ['/pro-forma-Invoice', '/add-Pro-Forma-Invoice', '/pro-forma-invoice-list']
   },
 ];
 
@@ -83,12 +83,7 @@ const purchaseItems = [
     path: '/vendors',
     matchPaths: ['/vendors','/add-vendor','/vendor-list']
   },
-  {
-    text: 'Work Order',
-    icon: <Construction />,
-    path: '/Work-Order',
-    matchPaths: ['/Work-Order','/add-Work-Order','/Work-Order-list']
-  },
+
 ];
 
 const othersItems = [
@@ -171,9 +166,9 @@ const othersItems = [
         <Drawer
             variant="permanent"
             sx={{
-                width: 290,
+                width: 280,
                 '& .MuiDrawer-paper': {
-                    width: 290,
+                    width: 280,
                     boxSizing: 'border-box',
                     p: 2,
                     bgcolor: '#fff',

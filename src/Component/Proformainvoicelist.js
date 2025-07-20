@@ -1,31 +1,52 @@
 import React from 'react';
 import {
   Box, Typography, Button, InputBase, IconButton, Avatar, Chip,
-  Table, TableHead, TableRow, TableCell, TableBody, TablePagination, Menu, MenuItem,
-  Paper
+  Table, TableHead, TableRow, TableCell, TableBody, TablePagination, Menu, MenuItem,Pagination
+,  Paper
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Sidebar from './Sidebar';
+import { Tabs, Tab, TextField, InputAdornment } from '@mui/material';
+import { useMediaQuery, useTheme } from '@mui/material';
+import { useState } from 'react';
+import {
+  Checkbox,
+
+} from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
+import BlockIcon from '@mui/icons-material/Block';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const rows = Array.from({ length: 15 }, (_, i) => ({
-  invoiceNo: 'PINV-00001',
-  customer: 'Customer 1',
-  date: '30/06/2025',
-  status: i % 2 === 0 ? 'Sent' : 'Draft',
-  amount: '₹118.00',
+  id: i + 1,
+  invoiceNo: `PINV-0000${i + 1}`,
+  customerName: `Customer ${i + 1}`,
+  createdDate: '30/06/2025',
+  status: i % 2 === 0 ? 'Draft' : 'Sent',
+  billAmount: 100 + i * 10,
 }));
 
-const statusColorMap = {
-  Draft: { bg: '#E6E6E6', color: '#333' },
-  Sent: { bg: '#E6F4EA', color: '#2E7D32' },
-};
 
 const ProformaInvoicelist = () => {
+  const [anchorEl, setAnchorEl] = useState(null);
+const [selectedItem, setSelectedItem] = useState(null);
+
+const handleMenuOpen = (event, itemId) => {
+  setAnchorEl(event.currentTarget);
+  setSelectedItem(itemId);
+};
+
+const handleMenuClose = () => {
+  setAnchorEl(null);
+  setSelectedItem(null);
+};
+
   const [menuAnchor, setMenuAnchor] = React.useState(null);
   const [selectedIndex, setSelectedIndex] = React.useState(null);
+const [tab, setTab] = useState(0);
 
   const handleMenuClick = (event, index) => {
     setMenuAnchor(event.currentTarget);
@@ -36,6 +57,14 @@ const ProformaInvoicelist = () => {
     setMenuAnchor(null);
     setSelectedIndex(null);
   };
+const theme = useTheme();
+const isSm = useMediaQuery(theme.breakpoints.down('sm'));
+const getFilteredItems = () => {
+  if (tab === 0) return rows;
+  if (tab === 1) return rows.filter(item => item.status === 'Draft');
+  if (tab === 2) return rows.filter(item => item.status === 'Sent');
+  return rows;
+};
 
   return (
     <Box sx={{ display: 'flex', height: '100vh', bgcolor: '#F9FAFB' }}>
@@ -46,12 +75,12 @@ const ProformaInvoicelist = () => {
         <Box
           sx={{
             height: 60,
-            borderBottom: '1px solid #eee',
             display: 'flex',
             alignItems: 'center',
             px: 4,
+            py:2,
             justifyContent: 'space-between',
-            bgcolor: '#fff',
+          
           }}
         >
           <Typography fontWeight="bold">Proforma Invoice</Typography>
@@ -86,90 +115,195 @@ const ProformaInvoicelist = () => {
             </Box>
           </Box>
         </Box>
-
-        <Box sx={{ p: 3, overflowY: 'auto', flexGrow: 1 }}>
-          <Paper elevation={0} sx={{ p: 3, borderRadius: 2 }}>
-      
-            <Box display="flex" justifyContent="space-between" mb={2}>
-              <Typography variant="h6" fontWeight="bold">Proforma Invoice</Typography>
+ <Box sx={{ px: 2, py: 2 }}>
+          <Paper sx={{ p: 1, borderRadius: 2 }}>
+               <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: isSm ? 'flex-start' : 'center',
+                px: 4,
+                py: 2,
+                flexDirection: isSm ? 'column' : 'row',
+                gap: 1,
+                borderBottom: '1px solid #e0e0e0'
+              }}
+            >
+              <Typography variant="h6" fontWeight={600}>
+                Pro Forma Invoice
+              </Typography>
               <Button
                 variant="contained"
                 sx={{
-                  backgroundColor: '#004085',
                   textTransform: 'none',
-                  '&:hover': { backgroundColor: '#003060' },
+                  borderRadius: 2,
+                  bgcolor: '#004085',
+                  '&:hover': { bgcolor: '#003366' }
                 }}
               >
-                + Add Proforma Invoice
+                + New Pro Forma Invoice
               </Button>
             </Box>
 
           
-            <Box display="flex" gap={1} mb={2}>
-              {['All', 'Draft', 'Sent'].map((label) => (
-                <Button key={label} variant="outlined" sx={{ textTransform: 'none' }}>
-                  {label}
-                </Button>
-              ))}
-            </Box>
+        
+            <Box
+              sx={{
+                px: 4,
+                pt: 2,
+                display: 'flex',
+                flexDirection: isSm ? 'column' : 'row',
+                justifyContent: 'space-between',
+                alignItems: isSm ? 'stretch' : 'center',
+                gap: 2,
+              }}
+            >
+              <Tabs
+                value={tab}
+                onChange={(e, newTab) => setTab(newTab)}
+                sx={{
+                  '& .MuiTab-root': {
+                    textTransform: 'none',
+                    bgcolor: '#f1f1f1',
+                    borderRadius: 2,
+                    mr: 1,
+                  },
+                  '& .Mui-selected': {
+                    bgcolor: '#004085',
+                    color: 'white !important',
+                  },
+                  '& .MuiTabs-indicator': {
+                    display: 'none',
+                  },
+                }}
+              >
+                <Tab label="All" />
+                <Tab label="Draft" />
+                <Tab label="Sent" />
+              </Tabs>
 
-       
-            <Table size="small" sx={{ bgcolor: '#fff', borderRadius: 2 }}>
-              <TableHead>
-                <TableRow sx={{ bgcolor: '#f5f6fa' }}>
-                  <TableCell padding="checkbox">
-                    <input type="checkbox" />
-                  </TableCell>
-                  <TableCell>Proforma Invoice #</TableCell>
-                  <TableCell>Customer Name</TableCell>
-                  <TableCell>Created Date</TableCell>
-                  <TableCell>Status</TableCell>
-                  <TableCell>Bill Amount</TableCell>
-                  <TableCell align="center">Action</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rows.map((row, i) => (
-                  <TableRow key={i} hover>
-                    <TableCell padding="checkbox">
-                      <input type="checkbox" />
-                    </TableCell>
-                    <TableCell sx={{ fontWeight: 500, color: '#007bff' }}>{row.invoiceNo}</TableCell>
-                    <TableCell>{row.customer}</TableCell>
-                    <TableCell>{row.date}</TableCell>
-                    <TableCell>
-                      <Chip
-                        label={row.status}
-                        size="small"
-                        sx={{
-                          bgcolor: statusColorMap[row.status].bg,
-                          color: statusColorMap[row.status].color,
-                          fontWeight: 500,
-                        }}
-                      />
-                    </TableCell>
-                    <TableCell>{row.amount}</TableCell>
-                    <TableCell align="center">
-                      <IconButton onClick={(e) => handleMenuClick(e, i)}>
-                        <MoreVertIcon />
-                      </IconButton>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-
-
-            <Box display="flex" justifyContent="flex-end" mt={2}>
-              <TablePagination
-                component="div"
-                count={100}
-                page={0}
-                rowsPerPage={15}
-                rowsPerPageOptions={[]}
-                onPageChange={() => {}}
+              <TextField
+                size="small"
+                placeholder="Search by item name..."
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <SearchIcon />
+                    </InputAdornment>
+                  ),
+                  sx: { bgcolor: 'white', borderRadius: 2 }
+                }}
               />
             </Box>
+  <Box sx={{ px: 4, pt: 2 }}>
+     <Table
+  size="small"
+  sx={{
+    bgcolor: '#fff',
+    borderRadius: 2,
+    boxShadow: '0px 1px 3px rgba(0,0,0,0.05)',
+    overflow: 'hidden',
+  }}
+>
+  <TableHead>
+    <TableRow sx={{ bgcolor: '#f5f6fa' }}>
+      <TableCell padding="checkbox">
+        <Checkbox size="small" />
+      </TableCell>
+      <TableCell sx={{ fontWeight: 600 }}>Proforma Invoice#</TableCell>
+      <TableCell sx={{ fontWeight: 600 }}>Customer Name</TableCell>
+      <TableCell sx={{ fontWeight: 600 }}>Created Date</TableCell>
+      <TableCell sx={{ fontWeight: 600 }}>Status</TableCell>
+      <TableCell sx={{ fontWeight: 600 }}>Bill Amount</TableCell>
+      <TableCell align="center" sx={{ fontWeight: 600 }}>Action</TableCell>
+    </TableRow>
+  </TableHead>
+
+  <TableBody>
+    {getFilteredItems().map((item) => (
+      <TableRow key={item.id} hover>
+        <TableCell padding="checkbox">
+          <Checkbox size="small" />
+        </TableCell>
+        <TableCell sx={{ fontWeight: 500, color: '#007bff' }}>{item.invoiceNo}</TableCell>
+        <TableCell>{item.customerName}</TableCell>
+        <TableCell>{item.createdDate}</TableCell>
+        <TableCell>
+          <Chip
+            label={item.status}
+            size="small"
+            sx={{
+              bgcolor: item.status === 'Sent' ? '#e6ffed' : '#f0f0f0',
+              color: item.status === 'Sent' ? '#28a745' : '#6c757d',
+              borderRadius: '4px',
+              fontWeight: 500,
+              px: 1.5,
+            }}
+          />
+        </TableCell>
+        <TableCell>₹{item.billAmount}.00</TableCell>
+        <TableCell align="center">
+          <IconButton size="small" onClick={(e) => handleMenuOpen(e, item.id)}>
+            <MoreVertIcon />
+          </IconButton>
+          {selectedItem === item.id && (
+            <Menu
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={handleMenuClose}
+              PaperProps={{ sx: { width: 180 } }}
+            >
+              <MenuItem>
+                <EditIcon fontSize="small" sx={{ mr: 1 }} /> Edit
+              </MenuItem>
+              <MenuItem>
+                <BlockIcon fontSize="small" sx={{ mr: 1 }} /> Mark as Inactive
+              </MenuItem>
+              <MenuItem sx={{ color: 'error.main' }}>
+                <DeleteIcon fontSize="small" sx={{ mr: 1 }} /> Delete
+              </MenuItem>
+            </Menu>
+          )}
+        </TableCell>
+      </TableRow>
+    ))}
+  </TableBody>
+</Table>
+</Box>
+
+
+
+            <Box
+                         sx={{
+                           display: 'flex',
+                           justifyContent: 'space-between',
+                           alignItems: 'center',
+                           mt: 2,
+                           flexDirection: isSm ? 'column' : 'row',
+                           gap: 1,
+                         }}
+                       >
+                         <Typography variant="body2">
+                           Showing 1 to 12 of 100 entries
+                         </Typography>
+                         <Pagination
+                           count={5}
+                           page={1}
+                           sx={{
+                             '& .MuiPaginationItem-root': {
+                               color: 'grey',
+                               borderColor: '#004085',
+                             },
+                             '& .Mui-selected': {
+                               backgroundColor: '#004085',
+                               color: '#fff',
+                               '&:hover': {
+                                 backgroundColor: '#003366',
+                               },
+                             },
+                           }}
+                         />
+                       </Box>
           </Paper>
         </Box>
 

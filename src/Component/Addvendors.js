@@ -37,7 +37,8 @@ export default function NewVendorForm() {
             </Typography>
           </Breadcrumbs>
 
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+
             <Paper
               elevation={0}
               sx={{
@@ -48,13 +49,23 @@ export default function NewVendorForm() {
                 borderRadius: '999px',
                 border: '1px solid #e0e0e0',
                 bgcolor: '#f9fafb',
-                width: 240,
+                width: {
+                  xs: 20,
+                  sm: 40,
+                  md: 120,
+                  lg: 240,
+                },
               }}
             >
               <SearchIcon sx={{ fontSize: 20, color: '#999' }} />
               <InputBase
                 placeholder="Search anything here..."
-                sx={{ ml: 1, fontSize: 14, flex: 1 }}
+                sx={{
+                  ml: 1,
+                  fontSize: 14,
+                  flex: 1,
+                  display: { xs: 'none', sm: 'none', md: 'block' },
+                }}
                 inputProps={{ 'aria-label': 'search' }}
               />
             </Paper>
@@ -68,10 +79,16 @@ export default function NewVendorForm() {
               }}
             >
               <NotificationsNoneIcon sx={{ fontSize: 20, color: '#666' }} />
-            </IconButton>  
-             <Box display="flex" alignItems="center" gap={1}>
+            </IconButton>
+
+            <Box display="flex" alignItems="center" gap={1}>
               <Avatar src="https://i.pravatar.cc/150?img=1" />
-              <Typography fontSize={14}>Admin name</Typography>
+              <Typography
+                fontSize={14}
+                sx={{ display: { xs: 'none', sm: 'none', md: 'block' } }}
+              >
+                Admin name
+              </Typography>
               <ArrowDropDownIcon />
             </Box>
           </Box>

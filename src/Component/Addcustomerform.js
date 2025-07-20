@@ -2,7 +2,7 @@ import {
   Box, Typography, Grid, TextField, Button, RadioGroup,
   FormControlLabel, Radio, FormLabel, Checkbox,
   IconButton, Paper, InputBase, Breadcrumbs, MenuItem, FormControl, InputAdornment,
-  Select,Avatar
+  Select, Avatar
 } from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
@@ -32,19 +32,31 @@ const textFieldStyle = {
 };
 
 export default function AddCustomerForm() {
-   const navigate = useNavigate();
+  const navigate = useNavigate();
   const titleOptions = ['MR', 'MS', 'MRS'];
- const location = useLocation();
-const customerData = location.state?.customer;
+  const location = useLocation();
+  const customerData = location.state?.customer;
 
-const [companyName, setCompanyName] = useState(customerData?.company || '');
-const [fullName, setFullName] = useState(customerData?.name || '');
-const [email, setEmail] = useState(customerData?.email || '');
-const [phone, setPhone] = useState(customerData?.phone || '');
-const [customerType, setCustomerType] = useState(customerData?.type || 'Business');
+  const [companyName, setCompanyName] = useState(customerData?.company || '');
+  const [fullName, setFullName] = useState(customerData?.name || '');
+  const [email, setEmail] = useState(customerData?.email || '');
+  const [phone, setPhone] = useState(customerData?.phone || '');
+  const [customerType, setCustomerType] = useState(customerData?.type || 'Business');
 
-const isEditMode = Boolean(customerData);
-
+  const isEditMode = Boolean(customerData);
+  const fieldSx = {
+    width: {
+      xs: '100%',
+      sm: 250,
+      md: 300,
+      lg: 330
+    },
+    '& .MuiOutlinedInput-root': {
+      borderRadius: '10px',
+      bgcolor: '#f9fafb',
+      height: 40
+    }
+  };
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -57,23 +69,19 @@ const isEditMode = Boolean(customerData);
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            mb: 3,
-            mt: 1,
-            px: 3
+            px: 3,
+            py: 2,
           }}
         >
-
           <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
-            <Typography color="text.secondary" fontSize="14px">
-              Customer
-            </Typography>
-            <Typography variant="h6" fontWeight={100} sx={{fontSize: 15}}>
+            <Typography color="text.secondary" fontSize="14px">Customer</Typography>
+            <Typography variant="h6" fontWeight={600} sx={{ fontSize: 15 }}>
               {isEditMode ? 'Edit Customer' : 'Add Customer'}
             </Typography>
-
           </Breadcrumbs>
 
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+
             <Paper
               elevation={0}
               sx={{
@@ -84,13 +92,23 @@ const isEditMode = Boolean(customerData);
                 borderRadius: '999px',
                 border: '1px solid #e0e0e0',
                 bgcolor: '#f9fafb',
-                width: 240,
+                width: {
+                  xs: 20,
+                  sm: 40,
+                  md: 120,
+                  lg: 240,
+                },
               }}
             >
               <SearchIcon sx={{ fontSize: 20, color: '#999' }} />
               <InputBase
                 placeholder="Search anything here..."
-                sx={{ ml: 1, fontSize: 14, flex: 1 }}
+                sx={{
+                  ml: 1,
+                  fontSize: 14,
+                  flex: 1,
+                  display: { xs: 'none', sm: 'none', md: 'block' },
+                }}
                 inputProps={{ 'aria-label': 'search' }}
               />
             </Paper>
@@ -104,13 +122,21 @@ const isEditMode = Boolean(customerData);
               }}
             >
               <NotificationsNoneIcon sx={{ fontSize: 20, color: '#666' }} />
-            </IconButton> <Box display="flex" alignItems="center" gap={1}>
-              <Avatar src="https://i.pravatar.cc/40?img=1" />
-              <Typography fontSize={14}>Admin name</Typography>
+            </IconButton>
+
+            <Box display="flex" alignItems="center" gap={1}>
+              <Avatar src="https://i.pravatar.cc/150?img=1" />
+              <Typography
+                fontSize={14}
+                sx={{ display: { xs: 'none', sm: 'none', md: 'block' } }}
+              >
+                Admin name
+              </Typography>
               <ArrowDropDownIcon />
             </Box>
           </Box>
         </Box>
+
 
         <Box sx={{ px: 4, py: 3, bgcolor: 'white' }}>
 
@@ -140,7 +166,8 @@ const isEditMode = Boolean(customerData);
             </RadioGroup>
 
             <Grid container spacing={2} mt={2}>
-              <Grid item xs={12} sm={4}>
+
+              <Grid item xs={12} sm={6} md={4}>
                 <Typography fontWeight={500} mb={0.5}>Primary Contact Full Name</Typography>
                 <Grid container spacing={1}>
                   <Grid item xs={4}>
@@ -154,24 +181,25 @@ const isEditMode = Boolean(customerData);
                   </Grid>
                   <Grid item xs={8}>
                     <TextField
-                      fullWidth 
-                       value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
+                      fullWidth
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
                       placeholder="Enter full name"
                       size="small"
                       sx={{
-                        '& .MuiOutlinedInput-root': {
-                          borderRadius: '10px',
-                          bgcolor: '#f9fafb',
-                          height: 40
+                        ...fieldSx,
+                        width: {
+                          xs: '100%',
+                          sm: 170,
+                          md: 250,
+                          lg: 250
                         }
                       }}
                     />
                   </Grid>
                 </Grid>
               </Grid>
-
-              <Grid item xs={12} sm={4}>
+              <Grid item xs={12} sm={6} md={4}>
                 <Typography fontWeight={500} mb={0.5}>Company Name</Typography>
                 <TextField
                   fullWidth
@@ -179,32 +207,21 @@ const isEditMode = Boolean(customerData);
                   onChange={(e) => setCompanyName(e.target.value)}
                   placeholder="Enter company name"
                   size="small"
-                  sx={{
-                    '& .MuiOutlinedInput-root': {
-                      borderRadius: '10px',
-                      bgcolor: '#f9fafb',
-                      height: 40
-                    }
-                  }}
+                  sx={fieldSx}
                 />
               </Grid>
 
-              <Grid item xs={12} sm={4}>
+              <Grid item xs={12} sm={6} md={4}>
                 <Typography fontWeight={500} mb={0.5}>Display Name</Typography>
                 <TextField
                   fullWidth
                   placeholder="Enter display name"
                   size="small"
-                  sx={{
-                    '& .MuiOutlinedInput-root': {
-                      borderRadius: '10px',
-                      bgcolor: '#f9fafb',
-                      height: 40
-                    }
-                  }}
+                  sx={fieldSx}
                 />
               </Grid>
-              <Grid item xs={12} sm={4}>
+
+              <Grid item xs={12} sm={6} md={4}>
                 <Typography fontWeight={500} mb={0.5}>Email Address</Typography>
                 <TextField
                   fullWidth
@@ -218,15 +235,17 @@ const isEditMode = Boolean(customerData);
                     )
                   }}
                   sx={{
-                    '& .MuiOutlinedInput-root': {
-                      borderRadius: '10px',
-                      bgcolor: '#f9fafb',
-                      height: 40
+                    ...fieldSx,
+                    width: {
+                      xs: '100%',
+                      sm: '100%',
+                      md: 330
                     }
                   }}
                 />
               </Grid>
-              <Grid item xs={12} sm={4}>
+
+              <Grid item xs={12} sm={6} md={4}>
                 <Typography fontWeight={500} mb={0.5}>Company Phone Number</Typography>
                 <TextField
                   fullWidth
@@ -239,52 +258,44 @@ const isEditMode = Boolean(customerData);
                       </InputAdornment>
                     )
                   }}
-                  sx={{
-                    '& .MuiOutlinedInput-root': {
-                      borderRadius: '10px',
-                      bgcolor: '#f9fafb',
-                      height: 40
-                    }
-                  }}
+                  sx={fieldSx}
                 />
               </Grid>
 
-              <Grid item xs={12} sm={4}>
+              <Grid item xs={12} sm={6} md={4}>
                 <Typography fontWeight={500} mb={0.5}>PAN Number</Typography>
                 <TextField
                   fullWidth
                   placeholder="Enter PAN number"
                   size="small"
-                  sx={{
-                    '& .MuiOutlinedInput-root': {
-                      borderRadius: '10px',
-                      bgcolor: '#f9fafb',
-                      height: 40
-                    }
-                  }}
+                  sx={fieldSx}
                 />
               </Grid>
 
-              <Grid item xs={12} sm={4}>
+              <Grid item xs={12} sm={6} md={4}>
                 <Typography fontWeight={500} mb={0.5}>GST Number</Typography>
                 <TextField
                   fullWidth
                   placeholder="Enter GST number"
                   size="small"
-                  sx={{
-                    '& .MuiOutlinedInput-root': {
-                      borderRadius: '10px',
-                      bgcolor: '#f9fafb',
-                      height: 40
-                    }
-                  }}
+                  sx={fieldSx}
                 />
               </Grid>
-
-              <Grid item xs={12} sm={4}>
+              <Grid item xs={12} sm={6} md={4}>
                 <Typography fontWeight={500} mb={0.5}>Currency Preference</Typography>
                 <FormControl fullWidth size="small">
-                  <Select defaultValue="" displayEmpty sx={{ borderRadius: '10px', bgcolor: '#f9fafb', height: 40 }}>
+                  <Select
+                    defaultValue=""
+                    displayEmpty
+                    sx={{
+                      width: {
+                        xs: '100%',
+                        sm: 250,
+                        md: 300,
+                        lg: 330
+                      }, borderRadius: '10px', bgcolor: '#f9fafb', height: 40,
+                    }}
+                  >
                     <MenuItem value="" disabled>Select currency</MenuItem>
                     <MenuItem value="INR">INR</MenuItem>
                     <MenuItem value="USD">USD</MenuItem>
@@ -292,39 +303,28 @@ const isEditMode = Boolean(customerData);
                   </Select>
                 </FormControl>
               </Grid>
-              <Grid item xs={12} sm={4}>
-                <Typography fontWeight={500} mb={0.5}>Upload Document</Typography>
-                <Button
-                  variant="outlined"
-                  fullWidth
-                  sx={{
-                    borderRadius: '10px',
-                    textTransform: 'none',
-                    height: '40px',
-                    fontWeight: 500,
-                  }}
-                >
-                  📎 Upload File
-                </Button>
-                <Typography variant="caption" display="block" sx={{ mt: 1, color: '#888' }}>
-                  Max upload file size: 5 MB
-                </Typography>
-              </Grid>
             </Grid>
- <Typography variant="h6" sx={{ fontWeight: 600, mt: 4, mb: 2 }}>Address Details</Typography>
-
+            <Box sx={{ borderTop: '1px solid #eee', mt: 4, }}>
+              <Box display={'flex'} justifyContent={'space-between'}>
+                <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>Address Details</Typography>
+                <FormControlLabel control={<Checkbox />} label="Copy Billing Address" /></Box></Box>
             <Box display={'flex'} justifyContent={'space-between'}>
               <Grid item xs={12} md={6} >
                 <Paper
                   elevation={0}
                   sx={{ p: -1, borderRadius: 2, height: '100%' }}
                 >
-                <Typography variant="subtitle1" sx={{ fontWeight: 500, mb: 2 }}>Billing Address</Typography>
+                  <Typography variant="subtitle1" sx={{ fontWeight: 500, mb: 2 }}>Billing Address</Typography>
                   <Grid container spacing={2}>
                     <Grid item xs={12}>
                       <TextField fullWidth label="Recipient Name" x={textFieldStyle} sx={{
-                        width: { xs: '100%', sm: '100%', md: 450 }
-                        ,
+                        width: {
+                          xs: '100%',
+                          sm: 250,
+                          md: 300,
+                          lg: 450
+                        },
+
                         '& .MuiOutlinedInput-root': {
                           borderRadius: '10px',
                           bgcolor: '#f9fafb',
@@ -334,7 +334,12 @@ const isEditMode = Boolean(customerData);
                     </Grid>
                     <Grid item xs={12}>
                       <TextField fullWidth label="Country/Region" placeholder="Select a country/region" x={textFieldStyle} sx={{
-                        width: { xs: '100%', sm: '100%', md: 450 }
+                        width: {
+                          xs: '100%',
+                          sm: 250,
+                          md: 300,
+                          lg: 450
+                        }
                         ,
                         '& .MuiOutlinedInput-root': {
                           borderRadius: '10px',
@@ -345,8 +350,12 @@ const isEditMode = Boolean(customerData);
                     </Grid>
                     <Grid item xs={12}>
                       <TextField fullWidth label="Address 1" placeholder="Street address or P.O. Box" x={textFieldStyle} sx={{
-                        width: { xs: '100%', sm: '100%', md: 450 }
-                        ,
+                        width: {
+                          xs: '100%',
+                          sm: 250,
+                          md: 300,
+                          lg: 450
+                        },
                         '& .MuiOutlinedInput-root': {
                           borderRadius: '10px',
                           bgcolor: '#f9fafb',
@@ -354,10 +363,14 @@ const isEditMode = Boolean(customerData);
                         },
                       }} />
                     </Grid>
-                     <Grid item xs={12}>
+                    <Grid item xs={12}>
                       <TextField fullWidth label="Address 2" placeholder="Apartment, suite, unit, building, floor, etc." x={textFieldStyle} sx={{
-                        width: { xs: '100%', sm: '100%', md: 450 }
-                        ,
+                        width: {
+                          xs: '100%',
+                          sm: 250,
+                          md: 300,
+                          lg: 450
+                        },
                         '& .MuiOutlinedInput-root': {
                           borderRadius: '10px',
                           bgcolor: '#f9fafb',
@@ -365,10 +378,15 @@ const isEditMode = Boolean(customerData);
                         },
                       }} />
                     </Grid>
-                      <Grid item xs={12}>
+                    <Grid item xs={12}>
                       <TextField fullWidth label="City" x={textFieldStyle} sx={{
-                        width: { xs: '100%', sm: '100%', md: 216 }
-                        ,
+                        width: {
+                          xs: '100%',
+                          sm: 110,
+                          md: 150,
+                          lg: 216
+                        },
+
                         '& .MuiOutlinedInput-root': {
                           borderRadius: '10px',
                           bgcolor: '#f9fafb',
@@ -377,8 +395,13 @@ const isEditMode = Boolean(customerData);
                       }} />
                     </Grid> <Grid item xs={6}>
                       <TextField fullWidth label="State" x={textFieldStyle} sx={{
-                        width: { xs: '100%', sm: '100%', md: 216 }
-                        ,
+                        width: {
+                          xs: '100%',
+                          sm: 110,
+                          md: 150,
+                          lg: 216
+                        },
+
                         '& .MuiOutlinedInput-root': {
                           borderRadius: '10px',
                           bgcolor: '#f9fafb',
@@ -388,8 +411,12 @@ const isEditMode = Boolean(customerData);
                     </Grid>
                     <Grid item xs={6}>
                       <TextField fullWidth label="Pin Code" x={textFieldStyle} sx={{
-                        width: { xs: '100%', sm: '100%', md: 216 }
-                        ,
+                        width: {
+                          xs: '100%',
+                          sm: 110,
+                          md: 150,
+                          lg: 216
+                        },
                         '& .MuiOutlinedInput-root': {
                           borderRadius: '10px',
                           bgcolor: '#f9fafb',
@@ -399,8 +426,13 @@ const isEditMode = Boolean(customerData);
                     </Grid>
                     <Grid item xs={6}>
                       <TextField fullWidth label="Fax Number" x={textFieldStyle} sx={{
-                        width: { xs: '100%', sm: '100%', md: 216 }
-                        ,
+                        width: {
+                          xs: '100%',
+                          sm: 110,
+                          md: 150,
+                          lg: 216
+                        },
+
                         '& .MuiOutlinedInput-root': {
                           borderRadius: '10px',
                           bgcolor: '#f9fafb',
@@ -409,24 +441,29 @@ const isEditMode = Boolean(customerData);
                       }} />
                     </Grid>
                     <Grid item xs={12}>
-                      <TextField fullWidth  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <PhoneIcon sx={{ fontSize: 18, color: '#888' }} />
-                      </InputAdornment>
-                    )
-                  }}label="Other Phone Number" x={textFieldStyle} sx={{
-                        width: { xs: '100%', sm: '100%', md: 216 }
-                        ,
+                      <TextField fullWidth InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <PhoneIcon sx={{ fontSize: 18, color: '#888' }} />
+                          </InputAdornment>
+                        )
+                      }} label="Other Phone Number" x={textFieldStyle} sx={{
+                        width: {
+                          xs: '100%',
+                          sm: 110,
+                          md: 150,
+                          lg: 216
+                        },
+
                         '& .MuiOutlinedInput-root': {
                           borderRadius: '10px',
                           bgcolor: '#f9fafb',
                           height: 40,
                         },
-                        
-                      }}  />
+
+                      }} />
                     </Grid>
-                    
+
                   </Grid>
                 </Paper>
               </Grid>
@@ -434,17 +471,21 @@ const isEditMode = Boolean(customerData);
               <Grid item xs={12} md={3} ml={3} >
                 <Paper
                   elevation={0}
-                  sx={{ p:-2, borderRadius: 2, height: '100%' }}
+                  sx={{ p: -2, borderRadius: 2, height: '100%' }}
                 >
-                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <Typography variant="subtitle1" sx={{ fontWeight: 500, mb: 1 }}>Shipping Address</Typography>
-                    <FormControlLabel control={<Checkbox />} label="Copy Billing Address" />
+
                   </Box>
                   <Grid container spacing={2}>
-                      <Grid item xs={12}>
+                    <Grid item xs={12}>
                       <TextField fullWidth label="Recipient Name" x={textFieldStyle} sx={{
-                        width: { xs: '100%', sm: '100%', md: 450 }
-                        ,
+                        width: {
+                          xs: '100%',
+                          sm: 250,
+                          md: 300,
+                          lg: 450
+                        },
                         '& .MuiOutlinedInput-root': {
                           borderRadius: '10px',
                           bgcolor: '#f9fafb',
@@ -452,10 +493,14 @@ const isEditMode = Boolean(customerData);
                         },
                       }} />
                     </Grid>
-                     <Grid item xs={12}>
+                    <Grid item xs={12}>
                       <TextField fullWidth label="Country/Region" placeholder="Select a country/region" x={textFieldStyle} sx={{
-                        width: { xs: '100%', sm: '100%', md: 450 }
-                        ,
+                        width: {
+                          xs: '100%',
+                          sm: 250,
+                          md: 300,
+                          lg: 450
+                        },
                         '& .MuiOutlinedInput-root': {
                           borderRadius: '10px',
                           bgcolor: '#f9fafb',
@@ -465,8 +510,12 @@ const isEditMode = Boolean(customerData);
                     </Grid>
                     <Grid item xs={12}>
                       <TextField fullWidth label="Address 1" placeholder="Street address or P.O. Box" x={textFieldStyle} sx={{
-                        width: { xs: '100%', sm: '100%', md: 450 }
-                        ,
+                        width: {
+                          xs: '100%',
+                          sm: 250,
+                          md: 300,
+                          lg: 450
+                        },
                         '& .MuiOutlinedInput-root': {
                           borderRadius: '10px',
                           bgcolor: '#f9fafb',
@@ -476,8 +525,12 @@ const isEditMode = Boolean(customerData);
                     </Grid>
                     <Grid item xs={12}>
                       <TextField fullWidth label="Address 2" placeholder="Apartment, suite, unit, building, floor, etc." x={textFieldStyle} sx={{
-                        width: { xs: '100%', sm: '100%', md: 450 }
-                        ,
+                        width: {
+                          xs: '100%',
+                          sm: 250,
+                          md: 300,
+                          lg: 450
+                        },
                         '& .MuiOutlinedInput-root': {
                           borderRadius: '10px',
                           bgcolor: '#f9fafb',
@@ -487,8 +540,12 @@ const isEditMode = Boolean(customerData);
                     </Grid>
                     <Grid item xs={6}>
                       <TextField fullWidth label="City" x={textFieldStyle} sx={{
-                        width: { xs: '100%', sm: '100%', md: 220 }
-                        ,
+                        width: {
+                          xs: '100%',
+                          sm: 110,
+                          md: 150,
+                          lg: 220
+                        },
                         '& .MuiOutlinedInput-root': {
                           borderRadius: '10px',
                           bgcolor: '#f9fafb',
@@ -498,8 +555,13 @@ const isEditMode = Boolean(customerData);
                     </Grid>
                     <Grid item xs={6}>
                       <TextField fullWidth label="State" x={textFieldStyle} sx={{
-                        width: { xs: '100%', sm: '100%', md: 220 }
-                        ,
+                        width: {
+                          xs: '100%',
+                          sm: 110,
+                          md: 150,
+                          lg: 220
+                        },
+
                         '& .MuiOutlinedInput-root': {
                           borderRadius: '10px',
                           bgcolor: '#f9fafb',
@@ -509,8 +571,13 @@ const isEditMode = Boolean(customerData);
                     </Grid>
                     <Grid item xs={6}>
                       <TextField fullWidth label="Pin Code" x={textFieldStyle} sx={{
-                        width: { xs: '100%', sm: '100%', md: 220 }
-                        ,
+                        width: {
+                          xs: '100%',
+                          sm: 110,
+                          md: 150,
+                          lg: 220
+                        },
+
                         '& .MuiOutlinedInput-root': {
                           borderRadius: '10px',
                           bgcolor: '#f9fafb',
@@ -520,8 +587,13 @@ const isEditMode = Boolean(customerData);
                     </Grid>
                     <Grid item xs={6}>
                       <TextField fullWidth label="Fax Number" x={textFieldStyle} sx={{
-                        width: { xs: '100%', sm: '100%', md: 220 }
-                        ,
+                        width: {
+                          xs: '100%',
+                          sm: 110,
+                          md: 150,
+                          lg: 220
+                        },
+
                         '& .MuiOutlinedInput-root': {
                           borderRadius: '10px',
                           bgcolor: '#f9fafb',
@@ -530,15 +602,20 @@ const isEditMode = Boolean(customerData);
                       }} />
                     </Grid>
                     <Grid item xs={12}>
-                      <TextField fullWidth  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <PhoneIcon sx={{ fontSize: 18, color: '#888' }} />
-                      </InputAdornment>
-                    )
-                  }} label="Other Phone Number" x={textFieldStyle} sx={{
-                        width: { xs: '100%', sm: '100%', md: 220 }
-                        ,
+                      <TextField fullWidth InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <PhoneIcon sx={{ fontSize: 18, color: '#888' }} />
+                          </InputAdornment>
+                        )
+                      }} label="Other Phone Number" x={textFieldStyle} sx={{
+                        width: {
+                          xs: '100%',
+                          sm: 110,
+                          md: 150,
+                          lg: 220
+                        },
+
                         '& .MuiOutlinedInput-root': {
                           borderRadius: '10px',
                           bgcolor: '#f9fafb',
@@ -549,12 +626,17 @@ const isEditMode = Boolean(customerData);
                   </Grid>
                 </Paper>
               </Grid>
-</Box>
+            </Box>
             <Grid container spacing={2} mt={4}>
               <Grid item xs={12}>
                 <Typography>Remark</Typography>
-                <TextField fullWidth multiline rows={3} x={textFieldStyle} sx={{
-                  width: { xs: '100%', sm: '100%', md: 1000 }
+                <TextField fullWidth multiline rows={1} x={textFieldStyle} sx={{
+                  width: {
+                    xs: 350,
+                    sm: 570,
+                    md: 900,
+                    lg: 1000
+                  }
                   ,
                   '& .MuiOutlinedInput-root': {
                     borderRadius: '10px',

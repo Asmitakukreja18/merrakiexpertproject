@@ -1,7 +1,7 @@
 import {
   Box, Grid, Typography, TextField, Button, MenuItem, Tooltip,
-  IconButton, InputAdornment, Paper, Breadcrumbs, InputBase, FormControl, Select, Avatar
-
+  IconButton, InputAdornment, Paper, Breadcrumbs, InputBase, FormControl, Select, Avatar,
+  useMediaQuery,
 } from '@mui/material';
 import {
   FormLabel,
@@ -9,11 +9,12 @@ import {
   FormControlLabel,
   Radio
 } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import SearchIcon from '@mui/icons-material/Search';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import  ArrowBackIcon  from '@mui/icons-material/ArrowBack';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import Sidebar from './Sidebar';
 import { useNavigate } from 'react-router-dom';
@@ -22,72 +23,88 @@ const vendors = ['Laxmi Motors', 'ABC Traders'];
 const taxes = ['GST 5%', 'GST 12%', 'None'];
 
 export default function AddItems() {
+  const theme = useTheme();
   const navigate = useNavigate()
   return (
     <Box sx={{ display: 'flex' }}>
       <Sidebar active="Items" />
 
       <Box sx={{ flex: 1, bgcolor: '#f9fafc', minHeight: '100vh' }}>
+  <Box
+    sx={{
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      px: 3,
+      py: 2,
+    }}
+  >
+    <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
+      <Typography color="text.secondary" fontSize="14px">
+        Product & Services
+      </Typography>
+      <Typography color="text.primary" fontWeight={600} fontSize="14px">
+        Add
+      </Typography>
+    </Breadcrumbs>
 
-        <Box
+    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+      
+      <Paper
+        elevation={0}
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          px: 1.5,
+          py: 0.5,
+          borderRadius: '999px',
+          border: '1px solid #e0e0e0',
+          bgcolor: '#f9fafb',
+        width: {
+      xs: 20,     
+      sm: 40,     
+      md: 120,    
+      lg: 240,      
+    },
+        }}
+      >
+        <SearchIcon sx={{ fontSize: 20, color: '#999' }} />
+        <InputBase
+          placeholder="Search anything here..."
           sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            mb: 3,
-            mt: 1,
-            px: 3
+            ml: 1,
+            fontSize: 14,
+            flex: 1,
+            display: { xs: 'none', sm: 'none', md: 'block' }, 
           }}
+          inputProps={{ 'aria-label': 'search' }}
+        />
+      </Paper>
+
+      <IconButton
+        sx={{
+          borderRadius: '12px',
+          border: '1px solid #e0e0e0',
+          bgcolor: '#f9fafb',
+          p: 1,
+        }}
+      >
+        <NotificationsNoneIcon sx={{ fontSize: 20, color: '#666' }} />
+      </IconButton>
+
+      <Box display="flex" alignItems="center" gap={1}>
+        <Avatar src="https://i.pravatar.cc/150?img=1" />
+        <Typography
+          fontSize={14}
+          sx={{ display: { xs: 'none', sm: 'none', md: 'block' } }}
         >
+          Admin name
+        </Typography>
+        <ArrowDropDownIcon />
+      </Box>
+    </Box>
+  </Box>
 
-          <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
-            <Typography color="text.secondary" fontSize="14px">
-              Product & Services
-            </Typography>
-            <Typography color="text.primary" fontWeight={600} fontSize="14px">
-              Add
-            </Typography>
-          </Breadcrumbs>
-
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            <Paper
-              elevation={0}
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                px: 1.5,
-                py: 0.5,
-                borderRadius: '999px',
-                border: '1px solid #e0e0e0',
-                bgcolor: '#f9fafb',
-                width: 240,
-              }}
-            >
-              <SearchIcon sx={{ fontSize: 20, color: '#999' }} />
-              <InputBase
-                placeholder="Search anything here..."
-                sx={{ ml: 1, fontSize: 14, flex: 1 }}
-                inputProps={{ 'aria-label': 'search' }}
-              />
-            </Paper>
-
-            <IconButton
-              sx={{
-                borderRadius: '12px',
-                border: '1px solid #e0e0e0',
-                bgcolor: '#f9fafb',
-                p: 1,
-              }}
-            >
-              <NotificationsNoneIcon sx={{ fontSize: 20, color: '#666' }} />
-            </IconButton>  
-             <Box display="flex" alignItems="center" gap={1}>
-              <Avatar src="https://i.pravatar.cc/150?img=1" />
-              <Typography fontSize={14}>Admin name</Typography>
-              <ArrowDropDownIcon />
-            </Box>
-          </Box>
-        </Box>
         <Box sx={{ px: 4, py: 4 }}>
 
           <Paper sx={{ p: 1, borderRadius: 2 }}>
@@ -99,9 +116,15 @@ export default function AddItems() {
                 mb: 2,
                 borderBottom: '1px solid #eee',
                 pb: 1,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 1,
+                cursor: 'pointer',
               }}
+              onClick={() => navigate(-1)}
             >
-              New Product & Services
+              <ArrowBackIcon sx={{ fontSize: 22 }} />
+             Products & Services
             </Typography>
             <FormLabel sx={{ mb: 1, fontWeight: 500 }}>Customer Type</FormLabel>
             <RadioGroup row defaultValue="business">
@@ -119,7 +142,12 @@ export default function AddItems() {
                     placeholder="Shaft"
                     size="small"
                     sx={{
-                      width: { xs: '100%', sm: '100%', md: 330 },
+                       width: {
+                          xs: '100%',
+                          sm: 150,
+                          md: 250,
+                          lg: 330
+                        },
                       '& .MuiOutlinedInput-root': {
                         borderRadius: '10px',
                         backgroundColor: '#f9fafb',
@@ -143,7 +171,12 @@ export default function AddItems() {
                     placeholder="Enter code"
                     size="small"
                     sx={{
-                      width: { xs: '100%', sm: '100%', md: 330 },
+                       width: {
+                          xs: '100%',
+                          sm: 150,
+                          md: 250,
+                          lg: 330
+                        },
                       '& .MuiOutlinedInput-root': {
                         borderRadius: '10px',
                         backgroundColor: '#f9fafb',
@@ -168,7 +201,12 @@ export default function AddItems() {
                     defaultValue="Tax"
                     size="small"
                     sx={{
-                      width: { xs: '100%', sm: '100%', md: 330 },
+                        width: {
+                          xs: '100%',
+                          sm: 150,
+                          md: 250,
+                          lg: 330
+                        },
                       '& .MuiOutlinedInput-root': {
                         borderRadius: '10px',
                         backgroundColor: '#f9fafb',
@@ -198,7 +236,12 @@ export default function AddItems() {
                     defaultValue="Active"
                     size="small"
                     sx={{
-                      width: { xs: '100%', sm: '100%', md: 330 },
+                        width: {
+                          xs: '100%',
+                          sm: 150,
+                          md: 250,
+                          lg: 330
+                        },
                       '& .MuiOutlinedInput-root': {
                         borderRadius: '10px',
                         backgroundColor: '#f9fafb',
@@ -224,7 +267,12 @@ export default function AddItems() {
                     placeholder="Enter category"
                     size="small"
                     sx={{
-                      width: { xs: '100%', sm: '100%', md: 330 },
+                       width: {
+                          xs: '100%',
+                          sm: 150,
+                          md: 250,
+                          lg: 330
+                        },
                       '& .MuiOutlinedInput-root': {
                         borderRadius: '10px',
                         backgroundColor: '#f9fafb',
@@ -255,8 +303,14 @@ export default function AddItems() {
                     fullWidth
                     defaultValue="kg"
                     size="small"
-                    sx={{
-                      width: { xs: '100%', sm: '100%', md: 330 },
+                   
+                       sx={{
+                          width: {
+                          xs: '100%',
+                          sm: 150,
+                          md: 250,
+                          lg: 330
+                        },
                       '& .MuiOutlinedInput-root': {
                         borderRadius: '10px',
                         backgroundColor: '#f9fafb',
@@ -281,15 +335,26 @@ export default function AddItems() {
               </Grid>
 
             </Grid>
-            <Typography variant="h6" sx={{ mt: 4, mb: 2, fontWeight: 600 }}>
+            <Typography variant="h6" sx={{ mt: 5, fontWeight: 600 }}>
               Product Details
             </Typography>
 
             <Box display={'flex'} justifyContent={'space-between'}>
-              <Grid item xs={12} md={6} >
+           <Grid container spacing={2}>
+ 
+  <Grid item xs={12} md={6}>
+    <Box
+    ml={2}
+      sx={{
+        width: { xs: '100%', md: '450px' },
+     
+      }}
+    >
+   
+       <Grid item xs={12} md={6} >
                 <Paper
                   elevation={0}
-                  sx={{ p: -1, borderRadius: 2, height: '100%' }}
+                  sx={{ p: 1, borderRadius: 2, height: '100%' }}
                 >
                   <Typography variant="subtitle1" fontWeight={600} mb={1}>
                     Sales Information
@@ -323,7 +388,12 @@ export default function AddItems() {
                           ),
                         }}
                         sx={{
-                          width: { xs: '100%', sm: '100%', md: 450 },
+                          width: {
+                          xs: '100%',
+                          sm: 250,
+                          md: 350,
+                          lg: 450
+                        },
                           '& .MuiOutlinedInput-root': {
                             borderRadius: '10px',
                             bgcolor: '#f9fafb',
@@ -347,7 +417,13 @@ export default function AddItems() {
                         size="small"
                         defaultValue="2"
                         sx={{
-                          width: { xs: '100%', sm: '100%', md: 367 },
+                       
+                          width: {
+                          xs: '100%',
+                          sm: 170,
+                          md: 250,
+                          lg: 367
+                        },
                           '& .MuiOutlinedInput-root': {
                             borderRadius: '10px',
                             bgcolor: '#f9fafb',
@@ -387,8 +463,14 @@ export default function AddItems() {
                         label="Item Description*"
                         placeholder="Type description"
                         sx={{
-                          width: { xs: '100%', sm: '100%', md: 450 }
-                          ,
+                        
+                          width: {
+                          xs: '100%',
+                          sm: 250,
+                          md: 350,
+                          lg: 450
+                        },
+                          
                           '& .MuiOutlinedInput-root': {
                             borderRadius: '10px',
                             bgcolor: '#f9fafb', height: 40,
@@ -399,11 +481,21 @@ export default function AddItems() {
                   </Grid>
                 </Paper>
               </Grid>
+    </Box>
+  </Grid>
 
-              <Grid item xs={12} md={6} ml={5} >
+  <Grid item xs={12} md={3}>
+    <Box
+      p={1}
+      sx={{
+        width: { xs: '100%', md: '480px' },
+    
+      }}
+    >
+     <Grid item xs={12} md={6} ml={1} >
                 <Paper
                   elevation={0}
-                  sx={{ p: -1, borderRadius: 2, height: '100%' }}
+                  sx={{ p: 1, borderRadius: 2, height: '100%' }}
                 >
                   <Typography variant="subtitle1" fontWeight={600} mb={1}>
                     Purchase Information
@@ -436,8 +528,13 @@ export default function AddItems() {
                             </InputAdornment>
                           ),
                         }}
-                        sx={{
-                          width: { xs: '100%', sm: '100%', md: 450 },
+                         sx={{
+                          width: {
+                          xs: '100%',
+                          sm: 250,
+                          md: 350,
+                          lg: 450
+                        },
                           '& .MuiOutlinedInput-root': {
                             borderRadius: '10px',
                             bgcolor: '#f9fafb',
@@ -462,8 +559,13 @@ export default function AddItems() {
                           label="Discount *"
                           size="small"
                           defaultValue="2"
-                          sx={{
-                            width: { xs: '100%', sm: '100%', md: 367 },
+                           sx={{
+                          width: {
+                          xs: '100%',
+                          sm: 170,
+                          md: 250,
+                          lg: 370
+                        },
                             '& .MuiOutlinedInput-root': {
                               borderRadius: '10px',
                               bgcolor: '#f9fafb',
@@ -475,7 +577,7 @@ export default function AddItems() {
                         <FormControl
                           size="small"
                           sx={{
-                            minWidth: 60,
+                            minWidth: 70,
                             '& .MuiOutlinedInput-root': {
                               borderRadius: '10px',
                               bgcolor: '#f9fafb',
@@ -504,8 +606,12 @@ export default function AddItems() {
                         label="Item Description*"
                         placeholder="Type description"
                         sx={{
-                          width: { xs: '100%', sm: '100%', md: 450 }
-                          ,
+                          width: {
+                          xs: '100%',
+                          sm: 250,
+                          md: 350,
+                          lg: 450
+                        },
                           '& .MuiOutlinedInput-root': {
                             borderRadius: '10px',
                             bgcolor: '#f9fafb', height: 40
@@ -520,9 +626,13 @@ export default function AddItems() {
                         size="small"
                         label="Preferred Vendor"
                         defaultValue="Laxmi Motors"
-                        sx={{
-                          width: { xs: '100%', sm: '100%', md: 450 }
-                          ,
+                         sx={{
+                          width: {
+                          xs: '100%',
+                          sm: 250,
+                          md: 350,
+                          lg: 450
+                        },
                           '& .MuiOutlinedInput-root': {
                             borderRadius: '10px',
                             bgcolor: '#f9fafb',
@@ -540,6 +650,11 @@ export default function AddItems() {
                   </Grid>
                 </Paper>
               </Grid>
+    </Box>
+  </Grid>
+</Grid>
+
+              
 
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 2, mt: 4 }}>

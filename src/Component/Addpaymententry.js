@@ -9,18 +9,22 @@ import {
   Avatar,
   InputBase,
   Grid,
-  Paper,
+  Paper,Breadcrumbs
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import Sidebar from './Sidebar';
-
+import { useNavigate } from 'react-router-dom';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import  ArrowBackIcon  from '@mui/icons-material/ArrowBack';
 const customers = ['Customer 1', 'Customer 2'];
 const currencies = ['INR', 'USD', 'EUR'];
 const paymentModes = ['Online', 'Cash', 'Cheque'];
 
 const AddPaymentsEntry = () => {
+  const navigate = useNavigate()
   return (
     <Box sx={{ display: 'flex', bgcolor: '#f4f5fa', minHeight: '100vh' }}>
   
@@ -29,50 +33,101 @@ const AddPaymentsEntry = () => {
       <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
       
         <Box
+    sx={{
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      px: 3,
+      py: 2,
+    }}
+  >
+    <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
+      <Typography color="text.secondary" fontSize="14px">
+        Product & Services
+      </Typography>
+      <Typography color="text.primary" fontWeight={600} fontSize="14px">
+        Add
+      </Typography>
+    </Breadcrumbs>
+
+    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+      
+      <Paper
+        elevation={0}
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          px: 1.5,
+          py: 0.5,
+          borderRadius: '999px',
+          border: '1px solid #e0e0e0',
+          bgcolor: '#f9fafb',
+        width: {
+      xs: 20,     
+      sm: 40,     
+      md: 120,    
+      lg: 240,      
+    },
+        }}
+      >
+        <SearchIcon sx={{ fontSize: 20, color: '#999' }} />
+        <InputBase
+          placeholder="Search anything here..."
           sx={{
-            backgroundColor: '#fff',
-            p: 2,
-            px: 3,
-            borderBottom: '1px solid #e0e0e0',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
+            ml: 1,
+            fontSize: 14,
+            flex: 1,
+            display: { xs: 'none', sm: 'none', md: 'block' }, 
           }}
+          inputProps={{ 'aria-label': 'search' }}
+        />
+      </Paper>
+
+      <IconButton
+        sx={{
+          borderRadius: '12px',
+          border: '1px solid #e0e0e0',
+          bgcolor: '#f9fafb',
+          p: 1,
+        }}
+      >
+        <NotificationsNoneIcon sx={{ fontSize: 20, color: '#666' }} />
+      </IconButton>
+
+      <Box display="flex" alignItems="center" gap={1}>
+        <Avatar src="https://i.pravatar.cc/150?img=1" />
+        <Typography
+          fontSize={14}
+          sx={{ display: { xs: 'none', sm: 'none', md: 'block' } }}
         >
-          <Typography variant="h6" fontWeight="bold">
-            Payments Settings
-          </Typography>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                bgcolor: '#f0f0f0',
-                px: 2,
-                py: 0.5,
-                borderRadius: '8px',
-              }}
-            >
-              <SearchIcon fontSize="small" sx={{ mr: 1 }} />
-              <InputBase placeholder="Search anything here..." />
-            </Box>
-            <IconButton>
-              <NotificationsNoneIcon />
-            </IconButton>
-            <Avatar src="/avatar.png" sx={{ width: 32, height: 32 }} />
-            <Typography fontSize={14}>Admin name</Typography>
-          </Box>
-        </Box>
+          Admin name
+        </Typography>
+        <ArrowDropDownIcon />
+      </Box>
+    </Box>
+  </Box>
 
        
         <Box sx={{ p: 3 }}>
           <Paper elevation={0} sx={{ p: 4, borderRadius: '12px' }}>
-            <Box display="flex" alignItems="center" gap={1} mb={3}>
-              <ArrowBackIosNewIcon fontSize="small" />
-              <Typography variant="h6" fontWeight="bold">
-                Add Payments Entry
-              </Typography>
-            </Box>
+             <Typography
+              variant="h6"
+              sx={{
+                fontWeight: 600,
+                color: '#111',
+                mb: 2,
+                borderBottom: '1px solid #eee',
+                pb: 1,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 1,
+                cursor: 'pointer',
+              }}
+              onClick={() => navigate(-1)}
+            >
+              <ArrowBackIcon sx={{ fontSize: 22 }} />
+             Products & Services
+            </Typography>
 
             <Grid container spacing={2}>
               <Grid item xs={12} md={4}>
@@ -198,13 +253,13 @@ const AddPaymentsEntry = () => {
             >
               <Typography sx={{ color: '#888' }}>Preview Receipt</Typography>
               <Box display="flex" gap={2}>
-                <Button variant="outlined" color="inherit" sx={{ textTransform: 'none' }}>
+                <Button variant="outlined" color="inherit" sx={{ textTransform: 'none',borderRadius:2 }}>
                   Cancel
                 </Button>
-                <Button variant="outlined" sx={{ textTransform: 'none' }}>
+                <Button variant="outlined" sx={{ textTransform: 'none',borderRadius:2 }}>
                   Save as Draft
                 </Button>
-                <Button variant="contained" sx={{ textTransform: 'none', bgcolor: '#003865' }}>
+                <Button variant="contained" sx={{ textTransform: 'none', bgcolor: '#003865',borderRadius:2 }}>
                   Save & Send
                 </Button>
               </Box>
