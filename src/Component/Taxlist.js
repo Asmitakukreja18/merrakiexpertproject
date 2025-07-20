@@ -53,47 +53,77 @@ const isSm = useMediaQuery(theme.breakpoints.down('sm'));
 
       <Box sx={{ flexGrow: 1 }}>
       
-        <Box
+          <Box
+    sx={{
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      px: 3,
+      py: 2,
+    }}
+  >
+      <Typography color="text.secondary" fontSize="14px">
+        Tax
+      </Typography>
+
+
+    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+      
+      <Paper
+        elevation={0}
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          px: 1.5,
+          py: 0.5,
+          borderRadius: '999px',
+          border: '1px solid #e0e0e0',
+          bgcolor: '#f9fafb',
+     width: {
+  xs: 20,     
+  sm: 150,
+  md: 200,
+  lg: 300,
+},
+
+        }}
+      >
+        <SearchIcon sx={{ fontSize: 20, color: '#999' }} />
+        <InputBase
+          placeholder="Search anything here..."
           sx={{
-            height: 60,
-            display: 'flex',
-            alignItems: 'center',
-            px: 3,
-            justifyContent: 'space-between',
+            ml: 1,
+            fontSize: 14,
+            flex: 1,
+            display: { xs: 'none', sm: 'none', md: 'block' }, 
           }}
+          inputProps={{ 'aria-label': 'search' }}
+        />
+      </Paper>
+
+      <IconButton
+        sx={{
+          borderRadius: '12px',
+          border: '1px solid #e0e0e0',
+          bgcolor: '#f9fafb',
+          p: 1,
+        }}
+      >
+        <NotificationsNoneIcon sx={{ fontSize: 20, color: '#666' }} />
+      </IconButton>
+
+      <Box display="flex" alignItems="center" gap={1}>
+        <Avatar src="https://i.pravatar.cc/150?img=1" />
+        <Typography
+          fontSize={14}
+          sx={{ display: { xs: 'none', sm: 'none', md: 'block' } }}
         >
-          <Typography fontWeight="bold">Tax</Typography>
-
-          <Box display="flex" alignItems="center" gap={2}>
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                bgcolor: '#F0F0F0',
-                px: 2,
-                py: 0.5,
-                borderRadius: 5,
-                minWidth: 250,
-              }}
-            >
-              <SearchIcon fontSize="small" sx={{ color: '#555' }} />
-              <InputBase
-                placeholder="Search anything here..."
-                sx={{ ml: 1, flex: 1, fontSize: 14 }}
-              />
-            </Box>
-
-            <IconButton>
-              <NotificationsNoneIcon />
-            </IconButton>
-
-            <Box display="flex" alignItems="center" gap={1}>
-              <Avatar src="https://i.pravatar.cc/40?img=1" />
-              <Typography fontSize={14}>Admin name</Typography>
-              <ArrowDropDownIcon />
-            </Box>
-          </Box>
-        </Box>
+          Admin name
+        </Typography>
+        <ArrowDropDownIcon />
+      </Box>
+    </Box>
+  </Box>
 
         <Box sx={{ p: 3 }}>
            <Box sx={{ px: 2, py: 2 }}>

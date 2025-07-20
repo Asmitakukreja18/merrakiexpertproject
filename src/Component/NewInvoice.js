@@ -408,28 +408,7 @@ const NewInvoicePage = () => {
       }}
     />
   </Grid>
-
-  <Grid item xs={12}>
-    <TextField
-      label="Subject"
-      placeholder="Write what this invoice is about"
-      fullWidth
-      sx={{
-        '& .MuiOutlinedInput-root': {
-          borderRadius: '10px',
-          bgcolor: '#f9fafb',
-          height: 40, width: {
-                          xs: '100%',
-                          sm: 150,
-                          md: 200,
-                          lg: 300
-                        },
-        },
-      }}
-    />
-  </Grid>
 </Grid>
-
 
 
           <Box mt={5}>

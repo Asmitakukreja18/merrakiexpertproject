@@ -409,7 +409,6 @@ const cellStyle = {
                     <TableCell sx={headStyle}>Item Details</TableCell>
                     <TableCell sx={headStyle}>Quantity</TableCell>
                     <TableCell sx={headStyle}>Rate</TableCell>
-                    <TableCell sx={headStyle}>Discount</TableCell>
                     <TableCell sx={headStyle}>Amount</TableCell>
                     <TableCell sx={headStyle}></TableCell>
                   </TableRow>
@@ -486,28 +485,7 @@ const cellStyle = {
                         />
                       </TableCell>
 
-                      <TableCell sx={cellStyle}>
-                        <FormControl fullWidth size="small" sx={{
-                          bgcolor: '#f9fafb',
-                          borderRadius: '20px',
-                          fontSize: '14px',
-                          height: 40,
-                          justifyContent: 'center',
-                        }}>
-                          <Select
-                            value={row.discount}
-                            onChange={(e) => updateRow(index, 'discount', e.target.value)}
-                            sx={{
-                              pl: 1.5,
-                            }}
-                          >
-                            <MenuItem value={0}>0%</MenuItem>
-                            <MenuItem value={5}>5%</MenuItem>
-                            <MenuItem value={10}>10%</MenuItem>
-                          </Select>
-                        </FormControl>
-                      </TableCell>
-
+                  
                       <TableCell sx={cellStyle}>
                         <TextField
                           fullWidth

@@ -118,7 +118,7 @@ const navigate =useNavigate()
     setItemModalOpen(false);
   };
   return (
-    <Box sx={{ display: 'flex', backgroundColor: '#f9f9f9', minHeight: '100vh' }}>
+    <Box sx={{ display: 'flex', backgroundColor: '#f9f9f9', minHeight: '100vh', }}>
       <Sidebar />
       <Box sx={{ flex: 1, p: 4 }}>
         <Box
@@ -214,7 +214,7 @@ const navigate =useNavigate()
 
           <Grid container spacing={1}>
 
-            <Grid item xs={12} sm={6} md={1}>
+            <Grid item xs={12} sm={6} md={3.5}>
               <TextField
                 required
                 label="Pro Forma Invoice Number"
@@ -310,87 +310,33 @@ const navigate =useNavigate()
                 />
               </Grid>
 
-              <Grid item xs={12} sm={6} md={2}>
-                <FormControl fullWidth required sx={{
-                      bgcolor: '#f9fafb',
-                      borderRadius: '12px',
-                    width: {
+  <Grid item xs={12} sm={6} md={4}>
+    <FormControl
+      required
+      fullWidth
+      sx={{
+        '& .MuiOutlinedInput-root': {
+          borderRadius: '10px',
+          bgcolor: '#f9fafb',
+          height: 40, width: {
                           xs: '100%',
-                          sm: 151,
-                          md: 250,
+                          sm: 150,
+                          md: 200,
                           lg: 300
-                        },  '& .MuiOutlinedInput-root': {
-                borderRadius: '10px',
-                bgcolor: '#f9fafb',
-                height: 40,
-              },
-                    }}>
-                  <InputLabel>Payment Terms</InputLabel>
-                  <Select
-                    label="Payment Terms"
-                    defaultValue="Due end of the month"
-                    
-                  >
-                    <MenuItem value="Due end of the month">Due end of the month</MenuItem>
-                    <MenuItem value="Net 15">Net 15</MenuItem>
-                    <MenuItem value="Net 30">Net 30</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
+                        },
+        },
+      }}
+    >
+      <InputLabel>Currency Preference</InputLabel>
+      <Select defaultValue="" displayEmpty>
+        <MenuItem value="INR">INR</MenuItem>
+        <MenuItem value="USD">USD</MenuItem>
+        <MenuItem value="EUR">EUR</MenuItem>
+      </Select>
+    </FormControl>
+  </Grid></Grid>
 
-              <Grid item xs={12} sm={6} md={2}>
-                <TextField
-                  fullWidth
-                  required
-                  label="Due Date"
-                  type="date"
-                  defaultValue="2025-06-30"
-                  InputLabelProps={{ shrink: true }}
-                  InputProps={{
-              
-                  }}sx={{
-                      bgcolor: '#f9fafb',
-                      borderRadius: '12px',
-                    width: {
-                          xs: '100%',
-                          sm: 151,
-                          md: 250,
-                          lg: 300
-                        },  '& .MuiOutlinedInput-root': {
-                borderRadius: '10px',
-                bgcolor: '#f9fafb',
-                height: 40,
-              },
-                    }}
-                />
-              </Grid>
-            </Grid>
-
-            <Grid container spacing={2} sx={{ mt: 1 }}>
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  label="Subject"
-                  placeholder="Write what this Pro Forma Invoice is about"
-                  InputProps={{
-                 
-                  }}sx={{
-                      bgcolor: '#f9fafb',
-                      borderRadius: '12px',
-                    width: {
-                          xs: '100%',
-                          sm: 151,
-                          md: 250,
-                          lg: 300
-                        },  '& .MuiOutlinedInput-root': {
-                borderRadius: '10px',
-                bgcolor: '#f9fafb',
-                height: 40,
-              },
-                    }}
-                />
-              </Grid>
-            </Grid>
+           
           </Grid>
 
 
@@ -422,7 +368,7 @@ const navigate =useNavigate()
                 boxShadow: 'none',
                 border: '1px solid #E0E0E0',
                 borderRadius: '12px',
-                overflowX: 'auto',
+              
               }}
             >
               <Table size="small">
@@ -661,7 +607,7 @@ const navigate =useNavigate()
                           xs: '100%',
                           sm: 251,
                           md: 350,
-                          lg: 500
+                          lg: 400
                         },  '& .MuiOutlinedInput-root': {
                 borderRadius: '10px',
                 bgcolor: '#f9fafb',

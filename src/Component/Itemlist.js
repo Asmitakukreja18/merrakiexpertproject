@@ -78,12 +78,13 @@ export default function ItemList() {
           borderRadius: '999px',
           border: '1px solid #e0e0e0',
           bgcolor: '#f9fafb',
-        width: {
-      xs: 20,     
-      sm: 40,     
-      md: 120,    
-      lg: 240,      
-    },
+     width: {
+  xs: 20,     
+  sm: 150,
+  md: 200,
+  lg: 300,
+},
+
         }}
       >
         <SearchIcon sx={{ fontSize: 20, color: '#999' }} />
@@ -125,18 +126,19 @@ export default function ItemList() {
     
         <Box sx={{ px: 2, py: 2 }}>
           <Paper sx={{ p: 1, borderRadius: 2 }}>
-               <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: isSm ? 'flex-start' : 'center',
-                px: 4,
-                py: 2,
-                flexDirection: isSm ? 'column' : 'row',
-                gap: 1,
-                borderBottom: '1px solid #e0e0e0'
-              }}
-            >
+             <Box
+  sx={{
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: isSm ? 'flex-start' : 'center',
+    flexDirection: isSm ? 'column' : 'row',
+    gap: 1,
+    px: 4,
+    py: 2,
+    borderBottom: '1px solid #e0e0e0'
+  }}
+>
+
               <Typography variant="h6" fontWeight={600}>
                 Products & Services
               </Typography>
@@ -205,7 +207,8 @@ export default function ItemList() {
 
            <Box sx={{ px: 4, pt: 2 }}>
               <Paper elevation={0}>
-                <Table>
+               <Table sx={{ minWidth: 600 }}>
+
                   <TableHead>
                     <TableRow sx={{ bgcolor: '#f5f6fa' }}>
                       <TableCell><Checkbox /></TableCell>

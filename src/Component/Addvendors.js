@@ -688,8 +688,18 @@ export default function NewVendorForm() {
       </Box>
 
       <Box mt={4} display="flex" justifyContent="flex-end" gap={2}>
-        <Button variant="outlined">Cancel</Button>
-        <Button variant="contained" color="primary"onClick={() => navigate('/vendor-list')}>Add</Button>
+        <Button variant="outlined"    sx={{
+                borderRadius: 2,
+               Color: '#004085',
+                textTransform: 'none',
+              }}>Cancel</Button>
+        <Button variant="contained" color="primary"onClick={() => navigate('/vendor-list')}    sx={{
+                borderRadius: 2,
+                backgroundColor: '#004085',
+                textTransform: 'none',
+                '&:hover': {
+                  backgroundColor: '#003060',
+                },}}>Add</Button>
       </Box></Paper></Box>
     </Box>
     </Box>

@@ -46,7 +46,6 @@ export default function QuotationListPage() {
       <Sidebar />
       <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
         
-        {/* Header */}
         <Box
           sx={{
             px: 3,
@@ -101,10 +100,9 @@ export default function QuotationListPage() {
           </Box>
         </Box>
 
-        {/* Content Area */}
         <Box sx={{ px: { xs: 1, sm: 2, md: 4 }, py: 2 }}>
           <Paper sx={{ borderRadius: 2 }}>
-            {/* Title + Button */}
+          
             <Box
               sx={{
                 px: 3,
@@ -127,7 +125,6 @@ export default function QuotationListPage() {
               </Button>
             </Box>
 
-            {/* Tabs + Search */}
             <Box sx={{ px: 3, pt: 3, pb: 1 }}>
               <Grid container spacing={2} justifyContent="space-between" alignItems="center">
                 <Grid item xs={12} md="auto">
@@ -165,7 +162,7 @@ export default function QuotationListPage() {
               </Grid>
             </Box>
 
-            {/* Table */}
+          
             <Box sx={{ px: 3, py: 2 }}>
               <Table sx={{ bgcolor: '#fff' }}>
                 <TableHead>
@@ -208,7 +205,6 @@ export default function QuotationListPage() {
               </Table>
             </Box>
 
-            {/* Pagination */}
             <Box
               sx={{
                 px: 3,

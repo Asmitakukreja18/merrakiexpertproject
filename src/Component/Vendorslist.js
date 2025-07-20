@@ -3,9 +3,11 @@ import {
   Box, Button, Typography, Grid, Table, TableHead, TableRow, TableCell,
   TableBody, Checkbox, TextField, Chip, Pagination, Tabs, Tab,
   IconButton, Menu, MenuItem, Dialog, DialogTitle, DialogContent,
-InputAdornment, Paper,Avatar,
+InputAdornment, Paper,Avatar,InputBase,
   DialogActions
 } from '@mui/material';
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import AddIcon from '@mui/icons-material/Add';
 import Sidebar from './Sidebar';
@@ -67,23 +69,77 @@ export default function VendorListPage() {
     <Box sx={{ display: 'flex' }}>
       <Sidebar />
       <Box  px={2} flex={1} display="flex" flexDirection="column" minHeight="100vh" >
-      <Box sx={{
+         <Box
+    sx={{
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      px: 3,
+      py: 2,
+    }}
+  >
+      <Typography color="text.secondary" fontSize="14px">
+        Product & Services
+      </Typography>
+
+
+    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+      
+      <Paper
+        elevation={0}
+        sx={{
           display: 'flex',
-          justifyContent: 'space-between',
           alignItems: 'center',
-          px: 4, py: 2,
-          bgcolor: 'white',
-        
-        }}>
-          <Typography variant="h6" fontWeight={600}>Vendors</Typography>
-         
+          px: 1.5,
+          py: 0.5,
+          borderRadius: '999px',
+          border: '1px solid #e0e0e0',
+          bgcolor: '#f9fafb',
+     width: {
+  xs: 20,     
+  sm: 150,
+  md: 200,
+  lg: 300,
+},
+
+        }}
+      >
+        <SearchIcon sx={{ fontSize: 20, color: '#999' }} />
+        <InputBase
+          placeholder="Search anything here..."
+          sx={{
+            ml: 1,
+            fontSize: 14,
+            flex: 1,
+            display: { xs: 'none', sm: 'none', md: 'block' }, 
+          }}
+          inputProps={{ 'aria-label': 'search' }}
+        />
+      </Paper>
+
+      <IconButton
+        sx={{
+          borderRadius: '12px',
+          border: '1px solid #e0e0e0',
+          bgcolor: '#f9fafb',
+          p: 1,
+        }}
+      >
+        <NotificationsNoneIcon sx={{ fontSize: 20, color: '#666' }} />
+      </IconButton>
 
       <Box display="flex" alignItems="center" gap={1}>
-              <Avatar src="https://i.pravatar.cc/40?img=1" />
-              <Typography fontSize={14}>Admin name</Typography>
-              <ArrowDropDownIcon />
-            </Box>
-        </Box>
+        <Avatar src="https://i.pravatar.cc/150?img=1" />
+        <Typography
+          fontSize={14}
+          sx={{ display: { xs: 'none', sm: 'none', md: 'block' } }}
+        >
+          Admin name
+        </Typography>
+        <ArrowDropDownIcon />
+      </Box>
+    </Box>
+  </Box>
 <Box sx={{ px: 2, py: 2 }}>
                             <Paper sx={{ p: 1, borderRadius: 2, }}>
         <Box sx={{
