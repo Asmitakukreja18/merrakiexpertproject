@@ -3,7 +3,7 @@ import {
     Box, Button, Typography, Grid, TextField, IconButton,
     MenuItem,  InputAdornment, Breadcrumbs, Link, Paper,
     Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
-    Menu, Checkbox,Avatar,InputBase
+    Menu, Checkbox,Avatar,InputBase,  useMediaQuery, useTheme,Pagination
 } from '@mui/material';
 
 import MoreVertIcon from '@mui/icons-material/MoreVert';
@@ -13,6 +13,9 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { Tabs, Tab } from '@mui/material';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 const PurchaseOrderActions = () => {
+  
+    const theme = useTheme();
+  const isSm = useMediaQuery(theme.breakpoints.down('sm'));
     const [anchorEl, setAnchorEl] = useState(null);
     const [menuIndex, setMenuIndex] = useState(null);
 const [tab, setTab] = useState(0);
@@ -40,48 +43,49 @@ const [tab, setTab] = useState(0);
         <Box display="flex" fontFamily="'Inter', sans-serif">
             <Sidebar />
             <Box flex={1} display="flex" flexDirection="column" minHeight="100vh">
+  <Box
+          sx={{
+            height: 60,
+            display: 'flex',
+            alignItems: 'center',
+            px: 4,
+            py:2,
+            justifyContent: 'space-between',
+          
+          }}
+        >
+          <Typography fontWeight="bold">Purchase Order</Typography>
 
-                <Box display="flex" justifyContent="space-between" alignItems="center" p={2} >
-                    <Breadcrumbs>
-                        <Typography color="text.primary">Purchase Order</Typography>
-                    </Breadcrumbs>
-                    <Box display="flex" alignItems="right" gap={2}>
-                         <Paper
-                                      elevation={0}
-                                      sx={{
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        px: 1.5,
-                                        py: 0.5,
-                                        borderRadius: '999px',
-                                        border: '1px solid #e0e0e0',
-                                        bgcolor: '#f9fafb',
-                                        width: 240,
-                                      }}
-                                    >
-                                      <SearchIcon sx={{ fontSize: 20, color: '#999' }} />
-                                      <InputBase
-                                        placeholder="Search anything here..."
-                                        sx={{ ml: 1, fontSize: 14, flex: 1 }}
-                                        inputProps={{ 'aria-label': 'search' }}
-                                      />
-                                    </Paper>
-                        <IconButton
+          <Box display="flex" alignItems="center" gap={2}>
+            <Box
               sx={{
-                borderRadius: '12px',
-                border: '1px solid #e0e0e0',
-                bgcolor: '#f9fafb',
-                p: 1,
+                display: 'flex',
+                alignItems: 'center',
+                bgcolor: '#F0F0F0',
+                px: 2,
+                py: 0.5,
+                borderRadius: 5,
+                minWidth: 250,
               }}
             >
-              <NotificationsNoneIcon sx={{ fontSize: 20, color: '#666' }} />
-            </IconButton></Box>
-                    </Box> <Box display="flex" alignItems="center" gap={1}>
+              <SearchIcon fontSize="small" sx={{ color: '#555' }} />
+              <InputBase
+                placeholder="Search anything here..."
+                sx={{ ml: 1, flex: 1, fontSize: 14 }}
+              />
+            </Box>
+
+            <IconButton>
+              <NotificationsNoneIcon />
+            </IconButton>
+
+            <Box display="flex" alignItems="center" gap={1}>
               <Avatar src="https://i.pravatar.cc/40?img=1" />
               <Typography fontSize={14}>Admin name</Typography>
               <ArrowDropDownIcon />
             </Box>
-                
+          </Box>
+        </Box>
 
                 <Box p={3}>
                     <Box sx={{ px: 2, py: 2 }}>
@@ -213,17 +217,37 @@ const [tab, setTab] = useState(0);
                             </TableBody>
                         </Table>
                     </TableContainer>
-                    <Box sx={{
-                        display: 'flex', justifyContent: 'space-between', alignItems: 'center', mt: 2
-                    }}>
-                        <Typography variant="body2">Showing 1 to 12 of 100 entries</Typography>
-                        <Box sx={{ display: 'flex', gap: 1 }}>
-                            <Button size="small" variant="outlined">1</Button>
-                            <Button size="small">2</Button>
-                            <Button size="small">3</Button>
-                            <Button size="small">4</Button>
-                        </Box>
-                    </Box></Paper></Box>
+                    <Box
+                                           sx={{
+                                             display: 'flex',
+                                             justifyContent: 'space-between',
+                                             alignItems: 'center',
+                                             mt: 2,
+                                             flexDirection: isSm ? 'column' : 'row',
+                                             gap: 1,
+                                           }}
+                                         >
+                                           <Typography variant="body2">
+                                             Showing 1 to 12 of 100 entries
+                                           </Typography>
+                                           <Pagination
+                                             count={5}
+                                             page={1}
+                                             sx={{
+                                               '& .MuiPaginationItem-root': {
+                                                 color: 'grey',
+                                                 borderColor: '#004085',
+                                               },
+                                               '& .Mui-selected': {
+                                                 backgroundColor: '#004085',
+                                                 color: '#fff',
+                                                 '&:hover': {
+                                                   backgroundColor: '#003366',
+                                                 },
+                                               },
+                                             }}
+                                           />
+                                         </Box></Paper></Box>
                 </Box>
             </Box>
         </Box>

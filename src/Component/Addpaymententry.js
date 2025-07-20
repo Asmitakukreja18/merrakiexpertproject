@@ -43,7 +43,7 @@ const AddPaymentsEntry = () => {
   >
     <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
       <Typography color="text.secondary" fontSize="14px">
-        Product & Services
+        Payment settings
       </Typography>
       <Typography color="text.primary" fontWeight={600} fontSize="14px">
         Add
@@ -126,7 +126,7 @@ const AddPaymentsEntry = () => {
               onClick={() => navigate(-1)}
             >
               <ArrowBackIcon sx={{ fontSize: 22 }} />
-             Products & Services
+             Payment settings
             </Typography>
 
             <Grid container spacing={2}>
@@ -256,10 +256,10 @@ const AddPaymentsEntry = () => {
                 <Button variant="outlined" color="inherit" sx={{ textTransform: 'none',borderRadius:2 }}>
                   Cancel
                 </Button>
-                <Button variant="outlined" sx={{ textTransform: 'none',borderRadius:2 }}>
+                <Button variant="outlined" sx={{ textTransform: 'none',borderRadius:2 }} onClick={() => navigate('/payment-settings')}>
                   Save as Draft
                 </Button>
-                <Button variant="contained" sx={{ textTransform: 'none', bgcolor: '#003865',borderRadius:2 }}>
+                <Button variant="contained" sx={{ textTransform: 'none', bgcolor: '#003865',borderRadius:2 }}  onClick={() => navigate('/payment-settings')}>
                   Save & Send
                 </Button>
               </Box>

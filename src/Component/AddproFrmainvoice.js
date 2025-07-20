@@ -36,7 +36,7 @@ import Sidebar from './Sidebar';
 import CloseIcon from '@mui/icons-material/Close';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 const NewProFormaInvoice = () => {
 const navigate =useNavigate()
   const [customers, setCustomers] = useState(['Customer 1', 'Customer 2']);
@@ -201,14 +201,19 @@ const navigate =useNavigate()
 
           <Typography
             variant="h6"
-            sx={{
-              fontWeight: 600,
-              color: '#111',
-              mb: 2,
-              borderBottom: '1px solid #eee',
-              pb: 1,
-            }}
-          >
+             sx={{
+                fontWeight: 600,
+                color: '#111',
+                mb: 2,
+                borderBottom: '1px solid #eee',
+                pb: 1,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 1,
+                cursor: 'pointer',
+              }}
+             onClick={() => navigate(-1)}
+          > <ArrowBackIcon sx={{ fontSize: 22 }} />
             New Pro Forma Invoice
           </Typography>
 

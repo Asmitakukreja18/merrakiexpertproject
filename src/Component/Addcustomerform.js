@@ -6,10 +6,10 @@ import {
 } from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
-import { Navigate, useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import { Navigate, useNavigate } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Sidebar from './Sidebar';
 import EmailIcon from '@mui/icons-material/Email';

@@ -4,7 +4,7 @@ import {
   TableBody, Checkbox, TextField, Chip, Pagination, Tabs, Tab,
   IconButton, Menu, MenuItem, Dialog, DialogTitle, DialogContent,
 InputAdornment, Paper,Avatar,InputBase,
-  DialogActions
+  DialogActions,  useMediaQuery, useTheme
 } from '@mui/material';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 
@@ -31,6 +31,9 @@ const vendors = Array.from({ length: 15 }, (_, i) => ({
 }));
 
 export default function VendorListPage() {
+  
+    const theme = useTheme();
+    const isSm = useMediaQuery(theme.breakpoints.down('sm'));
   const navigate = useNavigate();
   const [tab, setTab] = useState(0);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -79,7 +82,7 @@ export default function VendorListPage() {
     }}
   >
       <Typography color="text.secondary" fontSize="14px">
-        Product & Services
+        Vendors
       </Typography>
 
 
@@ -163,39 +166,56 @@ export default function VendorListPage() {
             + New Vendors
           </Button>
         </Box>
-        <Grid container alignItems="center" justifyContent="space-between" mb={2}>
-          <Grid item>
-            <Tabs
-              value={tab}
-              onChange={(_, newValue) => setTab(newValue)}
-              textColor="primary"
-              indicatorColor="primary"
-            >
-              <Tab label="All Vendor" />
-              <Tab label="Active Vendor" />
-              <Tab label="Inactive Vendor" />
-            </Tabs>
-          </Grid>
-          <Grid item>
-             <Box sx={{ px: 4, pt: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-         
-
-          <TextField
-            size="small"
-            placeholder="Search by vendor name..."
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-              sx: { bgcolor: 'white', borderRadius: 2 }
-            }}
-          />
-        </Box>
       
-          </Grid>
-        </Grid>
+               <Box
+              sx={{
+                px: 4,
+                pt: 2,
+                display: 'flex',
+                flexDirection: isSm ? 'column' : 'row',
+                justifyContent: 'space-between',
+                alignItems: isSm ? 'stretch' : 'center',
+                gap: 2,
+              }}
+            >
+              <Tabs
+                value={tab}
+                onChange={(e, newTab) => setTab(newTab)}
+                sx={{
+                  '& .MuiTab-root': {
+                    textTransform: 'none',
+                    bgcolor: '#f1f1f1',
+                    borderRadius: 2,
+                    mr: 1,
+                  },
+                  '& .Mui-selected': {
+                    bgcolor: '#004085',
+                    color: 'white !important',
+                  },
+                  '& .MuiTabs-indicator': {
+                    display: 'none',
+                  },
+                }}
+              >
+                <Tab label="All" />
+                <Tab label="Active" />
+                <Tab label="Inactive" />
+              </Tabs>
+
+              <TextField
+                size="small"
+                placeholder="Search by item name..."
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <SearchIcon />
+                    </InputAdornment>
+                  ),
+                  sx: { bgcolor: 'white', borderRadius: 2 }
+                }}
+              />
+            </Box>
+      
 
        
 

@@ -24,7 +24,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import AddIcon from '@mui/icons-material/Add';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import CloseIcon from '@mui/icons-material/Close';
-
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 const PurchaseOrderForm = () => {
 const navigate= useNavigate()
     const [customers, setCustomers] = useState(['Customer 1', 'Customer 2']);
@@ -193,7 +193,18 @@ const cellStyle = {
 
                 <Box p={3}>
                     <Paper sx={{ p: 1, borderRadius: 2 }}>
-                        <Typography fontWeight="bold" fontSize={18} mb={2}>New Purchase Order</Typography>
+                        <Typography fontWeight="bold" fontSize={18} mb={2}  sx={{
+                fontWeight: 600,
+                color: '#111',
+                mb: 2,
+                borderBottom: '1px solid #eee',
+                pb: 1,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 1,
+                cursor: 'pointer',
+              }} onClick={() => navigate(-1)}
+          > <ArrowBackIcon sx={{ fontSize: 22 }} />New Purchase Order</Typography>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={4}><TextField fullWidth label="Purchase Order*" sx={{
         '& .MuiOutlinedInput-root': {

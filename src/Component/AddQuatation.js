@@ -21,6 +21,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import { useTheme, useMediaQuery } from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 export default function NewQuotation() {
   const [quoteDate, setQuoteDate] = useState('2025-08-21');
   const [expiryDate, setExpiryDate] = useState('2025-09-21');
@@ -181,7 +182,12 @@ export default function NewQuotation() {
                 mb: 2,
                 borderBottom: '1px solid #eee',
                 pb: 1,
-              }}>Quatation</Typography>
+                display: 'flex',
+                alignItems: 'center',
+                gap: 1,
+                cursor: 'pointer',
+              }} onClick={() => navigate(-1)}
+          > <ArrowBackIcon sx={{ fontSize: 22 }} />Quatation</Typography>
             <Grid container spacing={2} mb={2}>
 
               <Grid item xs={12} sm={6} md={3}>

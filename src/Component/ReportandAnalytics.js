@@ -39,7 +39,7 @@ const ReportsAndAnalytics = () => {
   ];
 
   return (
-    <Box sx={{ display: 'flex', bgcolor: '#f4f5fa', minHeight: '100vh' }}>
+    <Box sx={{ display: 'flex', bgcolor: '#f7f7f7ff', minHeight: '100vh' }}>
       <Sidebar />
       <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
       

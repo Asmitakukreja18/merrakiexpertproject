@@ -9,6 +9,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import SearchIcon from '@mui/icons-material/Search';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 export default function NewVendorForm() {
 
   const navigate = useNavigate()
@@ -98,14 +99,19 @@ export default function NewVendorForm() {
                             <Paper sx={{ p: 1, borderRadius: 2, }}>
                                 <Typography
               variant="h6"
-              sx={{
+               sx={{
                 fontWeight: 600,
                 color: '#111',
                 mb: 2,
                 borderBottom: '1px solid #eee',
                 pb: 1,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 1,
+                cursor: 'pointer',
               }}
-            >
+            onClick={() => navigate(-1)}
+          > <ArrowBackIcon sx={{ fontSize: 22 }} />
              Vendors
             </Typography>
       <Grid container spacing={2}>

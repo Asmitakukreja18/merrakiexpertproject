@@ -36,7 +36,7 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { Navigate, useNavigate } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 const NewWorkOrder = () => {
@@ -202,13 +202,18 @@ const cellStyle = {
           <Typography
             variant="h6"
             sx={{
-              fontWeight: 600,
-              color: '#111',
-              mb: 2,
-              borderBottom: '1px solid #eee',
-              pb: 1,
-            }}
-          >
+                fontWeight: 600,
+                color: '#111',
+                mb: 2,
+                borderBottom: '1px solid #eee',
+                pb: 1,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 1,
+                cursor: 'pointer',
+              }}
+        onClick={() => navigate(-1)}
+          > <ArrowBackIcon sx={{ fontSize: 22 }} />
             New Work Order
           </Typography>
 
@@ -487,7 +492,7 @@ const cellStyle = {
             </TableContainer>
   <Grid container spacing={2} mt={4} alignItems="stretch">
 
-                <Grid item xs={12} md={8}>
+                <Grid item xs={12} md={8} >
                   <Paper sx={{ p: 2, height: '40%' }}>
                     <TextField
                       multiline
@@ -509,7 +514,7 @@ const cellStyle = {
                   </Paper>
                 </Grid>
 
-                <Grid item xs={12} md={4}>
+                <Grid item xs={12} md={4} ml={10}>
                   <Paper
                     variant="outlined"
                     sx={{
